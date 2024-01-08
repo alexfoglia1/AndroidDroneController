@@ -61,7 +61,7 @@
         android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
-        android:layout_x="68dp"
+        android:layout_x="50dp"
         android:layout_y="66dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -73,7 +73,7 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="133dp"
-        android:layout_x="109dp"
+        android:layout_x="91dp"
         android:layout_y="66dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -81,11 +81,47 @@
         tools:layout_editor_absoluteY="109dp" />
 
     <EditText
-        android:id="@+id/editRollSAT"
+        android:id="@+id/editRollKT"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="179dp"
-        android:layout_x="148dp"
+        android:layout_marginStart="133dp"
+        android:layout_x="131dp"
+        android:layout_y="67dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editPitchKT"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_x="132dp"
+        android:layout_y="122dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editYawKT"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_x="132dp"
+        android:layout_y="175dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editRollBD"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="250dp"
         android:layout_y="66dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -97,7 +133,7 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="228dp"
-        android:layout_x="189dp"
+        android:layout_x="210dp"
         android:layout_y="66dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -105,11 +141,11 @@
         tools:layout_editor_absoluteY="109dp" />
 
     <EditText
-        android:id="@+id/editRollBD"
+        android:id="@+id/editRollSAT"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="279dp"
-        android:layout_x="229dp"
+        android:layout_marginStart="179dp"
+        android:layout_x="169dp"
         android:layout_y="66dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -121,8 +157,8 @@
         android:layout_width="69dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
-        android:layout_x="271dp"
-        android:layout_y="66dp"
+        android:layout_x="285dp"
+        android:layout_y="67dp"
         android:text="Tx"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
@@ -134,7 +170,7 @@
         android:layout_marginStart="16dp"
         android:layout_x="14dp"
         android:layout_y="77dp"
-        android:text="PID Roll"
+        android:text="PIDR"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="123dp" />
 
@@ -143,8 +179,8 @@
         android:layout_width="69dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
-        android:layout_x="271dp"
-        android:layout_y="122dp"
+        android:layout_x="285dp"
+        android:layout_y="123dp"
         android:text="Tx"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
@@ -154,7 +190,7 @@
         android:layout_width="69dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
-        android:layout_x="270dp"
+        android:layout_x="285dp"
         android:layout_y="174dp"
         android:text="Tx"
         app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +225,7 @@
         android:layout_marginStart="16dp"
         android:layout_x="14dp"
         android:layout_y="133dp"
-        android:text="PID Ptc"
+        android:text="PIDP"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="123dp" />
 
@@ -200,7 +236,7 @@
         android:layout_marginStart="16dp"
         android:layout_x="14dp"
         android:layout_y="196dp"
-        android:text="PID Yaw"
+        android:text="PIDY"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="123dp" />
 
@@ -286,7 +322,7 @@
         android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
-        android:layout_x="69dp"
+        android:layout_x="50dp"
         android:layout_y="122dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -298,7 +334,7 @@
         android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
-        android:layout_x="69dp"
+        android:layout_x="50dp"
         android:layout_y="175dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -346,7 +382,7 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="133dp"
-        android:layout_x="109dp"
+        android:layout_x="92dp"
         android:layout_y="122dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -358,55 +394,7 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="133dp"
-        android:layout_x="110dp"
-        android:layout_y="175dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="109dp" />
-
-    <EditText
-        android:id="@+id/editPitchSAT"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="179dp"
-        android:layout_x="148dp"
-        android:layout_y="122dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="109dp" />
-
-    <EditText
-        android:id="@+id/editYawSAT"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="179dp"
-        android:layout_x="150dp"
-        android:layout_y="175dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="109dp" />
-
-    <EditText
-        android:id="@+id/editPitchAD"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_x="189dp"
-        android:layout_y="122dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="109dp" />
-
-    <EditText
-        android:id="@+id/editYawAD"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_x="190dp"
+        android:layout_x="92dp"
         android:layout_y="175dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -418,7 +406,31 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="279dp"
-        android:layout_x="229dp"
+        android:layout_x="251dp"
+        android:layout_y="122dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editPitchSAT"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="179dp"
+        android:layout_x="173dp"
+        android:layout_y="122dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editPitchAD"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_x="212dp"
         android:layout_y="122dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -430,7 +442,31 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="279dp"
-        android:layout_x="228dp"
+        android:layout_x="250dp"
+        android:layout_y="175dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editYawAD"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_x="212dp"
+        android:layout_y="175dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editYawSAT"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="179dp"
+        android:layout_x="172dp"
         android:layout_y="175dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -491,7 +527,8 @@
         android:layout_height="wrap_content"
         android:layout_x="236dp"
         android:layout_y="9dp"
-        android:text="Connect" />
+        android:text="Connect"
+        android:onClick="connect"/>
 
     <TextView
         android:id="@+id/txtConnStatus"
@@ -513,24 +550,27 @@
         android:id="@+id/btnRequestPid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="49dp"
+        android:layout_x="120dp"
         android:layout_y="222dp"
+        android:onClick="requestPidParams"
         android:text="Request" />
 
     <Button
         android:id="@+id/btnRequestThrottleParams"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="50dp"
-        android:layout_y="333dp"
+        android:layout_x="120dp"
+        android:layout_y="334dp"
+        android:onClick="requestThrottleParams"
         android:text="Request" />
 
     <Button
         android:id="@+id/btnRequestMotorBounds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="31dp"
-        android:layout_y="611dp"
+        android:layout_x="120dp"
+        android:layout_y="610dp"
+        android:onClick="requestMotorParams"
         android:text="Request" />
 
     <Button
@@ -540,29 +580,5 @@
         android:layout_x="30dp"
         android:layout_y="660dp"
         android:text="Flash Write" />
-
-    <Button
-        android:id="@+id/btnRefreshPid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="183dp"
-        android:layout_y="222dp"
-        android:text="Refresh" />
-
-    <Button
-        android:id="@+id/btnRefreshThrottleParams"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="186dp"
-        android:layout_y="333dp"
-        android:text="Refresh" />
-
-    <Button
-        android:id="@+id/btnRefreshMotorBounds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="144dp"
-        android:layout_y="610dp"
-        android:text="Refresh" />
 
 </AbsoluteLayout>
