@@ -18,6 +18,18 @@ import java.util.LinkedList;
 import java.util.UUID;
 
 public class PicoComm {
+
+    private static PicoComm instance = new PicoComm();
+    public static final PicoComm reinstance() {
+        PicoComm.instance = new PicoComm();
+        return PicoComm.instance;
+    }
+
+    public static final PicoComm instance()
+    {
+        return PicoComm.instance;
+    }
+
     private static final int[] GET_SW_VERSION = new int[] {
             0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0xE8, 0x03, 0xDC, 0x05, 0xDC, 0x05, 0xE8, 0x03, 0x40
     };
@@ -70,7 +82,7 @@ public class PicoComm {
     private byte[] rxBuf;
     private int llRxBuf;
     private boolean stopped;
-    public PicoComm() {
+    private PicoComm() {
         outputStream = null;
         inputStream = null;
         rxThread = null;

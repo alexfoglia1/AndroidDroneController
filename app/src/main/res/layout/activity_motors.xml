@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/AbsoluteLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="Deprecated">
+
+    <EditText
+        android:id="@+id/editMinM4"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="10dp"
+        android:layout_y="480dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMaxM4"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="61dp"
+        android:layout_y="480dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMinM3"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="250dp"
+        android:layout_y="480dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMaxM3"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="300dp"
+        android:layout_y="480dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <Button
+        android:id="@+id/btnUpdateThrottleParams"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_x="20dp"
+        android:layout_y="130dp"
+        android:onClick="writeThrottleParams"
+        android:text="Tx"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <Button
+        android:id="@+id/btnUpdateMotorBounds"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_x="20dp"
+        android:layout_y="624dp"
+        android:onClick="writeMotorParams"
+        android:text="Tx"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="10dp"
+        android:layout_y="80dp"
+        android:text="Descend"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="10dp"
+        android:layout_y="234dp"
+        android:text="M1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="321dp"
+        android:layout_y="230dp"
+        android:text="M2"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="328dp"
+        android:layout_y="530dp"
+        android:text="M3"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="10dp"
+        android:layout_y="530dp"
+        android:text="M4"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="140dp"
+        android:layout_y="80dp"
+        android:text="Hovering"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_x="260dp"
+        android:layout_y="80dp"
+        android:text="Climb"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <EditText
+        android:id="@+id/editDescend"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_x="80dp"
+        android:layout_y="60dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editHovering"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_x="204dp"
+        android:layout_y="60dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editClimb"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_x="300dp"
+        android:layout_y="60dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMinM1"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="10dp"
+        android:layout_y="267dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMaxM1"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="62dp"
+        android:layout_y="267dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMaxM2"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="300dp"
+        android:layout_y="261dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editMinM2"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="279dp"
+        android:layout_x="250dp"
+        android:layout_y="261dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <Button
+        android:id="@+id/btnRequestMotorBounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="620dp"
+        android:onClick="requestMotorParams"
+        android:text="Request" />
+
+    <Button
+        android:id="@+id/btnRequestThrottleParams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="130dp"
+        android:onClick="requestThrottleParams"
+        android:text="Request" />
+
+    <Switch
+        android:id="@+id/switchM1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="10dp"
+        android:layout_y="320dp"
+        android:text="Enabled" />
+
+    <Switch
+        android:id="@+id/switchM2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="320dp"
+        android:text="Enabled" />
+
+    <Switch
+        android:id="@+id/switchM3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="450dp"
+        android:text="Enabled" />
+
+    <Switch
+        android:id="@+id/switchM4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="10dp"
+        android:layout_y="450dp"
+        android:text="Enabled" />
+
+</AbsoluteLayout>
