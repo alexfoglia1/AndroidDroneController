@@ -10,6 +10,10 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.icu.util.Output;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,13 +35,29 @@ public class MainActivity extends AppCompatActivity implements PicoClient {
     private OutputStream outputStream;
     private InputStream inputStream;
 
+    private Button btnTxPidRoll;
+    private Button btnTxPidPitch;
+    private Button btnTxPidYaw;
+    private Button btnTxThrottleParams;
+    private Button btnTxMotorParams;
+    private Button btnTxFlashWrite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnTxPidRoll = (Button) findViewById(R.id.btnUpdatePidRoll);
+        btnTxPidPitch = (Button) findViewById(R.id.btnUpdatePidPitch);
+        btnTxPidYaw = (Button) findViewById(R.id.btnUpdatePidYaw);
+        btnTxThrottleParams = (Button) findViewById(R.id.btnUpdateThrottleParams);
+        btnTxMotorParams = (Button) findViewById(R.id.btnUpdateMotorBounds);
+        btnTxFlashWrite = (Button) findViewById(R.id.btnFlashWrite);
+
         socket = null;
-        picoComm = null;
+        inputStream = null;
+        outputStream = null;
+        picoComm = new PicoComm();
 
         initBluetooth();
     }
@@ -53,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements PicoClient {
 
             txtStatus.setText("Connected");
 
-            picoComm = new PicoComm();
             picoComm.setInputStream(inputStream);
             picoComm.setOutputStream(outputStream);
             picoComm.attachClient(this);
@@ -62,7 +81,13 @@ public class MainActivity extends AppCompatActivity implements PicoClient {
             btnConnect.setText("Disconnect");
         }
         else {
-            picoComm.stop();
+            if (!picoComm.stop()) {
+                Toast.makeText(getBaseContext(),"ERROR: STOP RX THREAD",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            picoComm = new PicoComm();
+
             if (socket != null) {
                 try {
                     socket.close();
@@ -78,17 +103,139 @@ public class MainActivity extends AppCompatActivity implements PicoClient {
     }
 
     public void requestThrottleParams(View v) {
-        picoComm.getThrottleParams();
+        if (!picoComm.getThrottleParams()) {
+            Toast.makeText(getBaseContext(),"CANNOT SEND",
+                    Toast.LENGTH_SHORT).show();
+        };
     }
 
     public void requestMotorParams(View v) {
-        picoComm.getMotorParams();
+        if (!picoComm.getMotorParams()) {
+            Toast.makeText(getBaseContext(),"CANNOT SEND",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void requestPidParams(View v) {
-        picoComm.getPidParams();
+        if (!picoComm.getPidParams()) {
+            Toast.makeText(getBaseContext(),"CANNOT SEND",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
+    public void writeRollParams(View v) {
+        EditText[] editTexts = new EditText[]{  findViewById(R.id.editRollKP),
+                findViewById(R.id.editRollKI),
+                findViewById(R.id.editRollKT),
+                findViewById(R.id.editRollSAT),
+                findViewById(R.id.editRollAD),
+                findViewById(R.id.editRollBD)};
+
+        if (editTexts[0].getText().length() == 0) {
+            editTexts[0].setText("0.0");
+        }
+        if (editTexts[1].getText().length() == 0) {
+            editTexts[1].setText("0.0");
+        }
+        if (editTexts[2].getText().length() == 0) {
+            editTexts[2].setText("0.0");
+        }
+        if (editTexts[3].getText().length() == 0) {
+            editTexts[3].setText("0.0");
+        }
+        if (editTexts[4].getText().length() == 0) {
+            editTexts[4].setText("0.0");
+        }
+        if (editTexts[5].getText().length() == 0) {
+            editTexts[5].setText("0.0");
+        }
+
+        if (!picoComm.writeRollParams(Float.parseFloat(editTexts[0].getText().toString()),
+                                      Float.parseFloat(editTexts[1].getText().toString()),
+                                      Float.parseFloat(editTexts[2].getText().toString()),
+                                      Float.parseFloat(editTexts[3].getText().toString()),
+                                      Float.parseFloat(editTexts[4].getText().toString()),
+                                      Float.parseFloat(editTexts[5].getText().toString()))) {
+            Toast.makeText(getBaseContext(),"CANNOT SEND",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void writePitchParams(View v) {
+        EditText[] editTexts = new EditText[]{  findViewById(R.id.editPitchKP),
+                findViewById(R.id.editPitchKI),
+                findViewById(R.id.editPitchKT),
+                findViewById(R.id.editPitchSAT),
+                findViewById(R.id.editPitchAD),
+                findViewById(R.id.editPitchBD)};
+
+        if (editTexts[0].getText().length() == 0) {
+            editTexts[0].setText("0.0");
+        }
+        if (editTexts[1].getText().length() == 0) {
+            editTexts[1].setText("0.0");
+        }
+        if (editTexts[2].getText().length() == 0) {
+            editTexts[2].setText("0.0");
+        }
+        if (editTexts[3].getText().length() == 0) {
+            editTexts[3].setText("0.0");
+        }
+        if (editTexts[4].getText().length() == 0) {
+            editTexts[4].setText("0.0");
+        }
+        if (editTexts[5].getText().length() == 0) {
+            editTexts[5].setText("0.0");
+        }
+
+        if (!picoComm.writePitchParams(Float.parseFloat(editTexts[0].getText().toString()),
+                Float.parseFloat(editTexts[1].getText().toString()),
+                Float.parseFloat(editTexts[2].getText().toString()),
+                Float.parseFloat(editTexts[3].getText().toString()),
+                Float.parseFloat(editTexts[4].getText().toString()),
+                Float.parseFloat(editTexts[5].getText().toString()))) {
+            Toast.makeText(getBaseContext(),"CANNOT SEND",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void writeYawParams(View v) {
+        EditText[] editTexts = new EditText[]{  findViewById(R.id.editYawKP),
+                findViewById(R.id.editYawKI),
+                findViewById(R.id.editYawKT),
+                findViewById(R.id.editYawSAT),
+                findViewById(R.id.editYawAD),
+                findViewById(R.id.editYawBD)};
+
+        if (editTexts[0].getText().length() == 0) {
+            editTexts[0].setText("0.0");
+        }
+        if (editTexts[1].getText().length() == 0) {
+            editTexts[1].setText("0.0");
+        }
+        if (editTexts[2].getText().length() == 0) {
+            editTexts[2].setText("0.0");
+        }
+        if (editTexts[3].getText().length() == 0) {
+            editTexts[3].setText("0.0");
+        }
+        if (editTexts[4].getText().length() == 0) {
+            editTexts[4].setText("0.0");
+        }
+        if (editTexts[5].getText().length() == 0) {
+            editTexts[5].setText("0.0");
+        }
+
+        if (!picoComm.writeYawParams(Float.parseFloat(editTexts[0].getText().toString()),
+                Float.parseFloat(editTexts[1].getText().toString()),
+                Float.parseFloat(editTexts[2].getText().toString()),
+                Float.parseFloat(editTexts[3].getText().toString()),
+                Float.parseFloat(editTexts[4].getText().toString()),
+                Float.parseFloat(editTexts[5].getText().toString()))) {
+            Toast.makeText(getBaseContext(),"CANNOT SEND",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
     private boolean initBluetooth() {
         boolean result = true;
 
@@ -141,6 +288,30 @@ public class MainActivity extends AppCompatActivity implements PicoClient {
         }
 
         return result;
+    }
+
+    @Override
+    public void onWrongChecksum(int txStatus) {
+        runOnUiThread(()->{
+                Toast.makeText(getBaseContext(),"ERROR: WRONG CHECKSUM",
+                Toast.LENGTH_SHORT).show();
+            });
+        switch (txStatus) {
+            case PicoComm.TX_GET_SW_VER:
+                picoComm.getSwVersion();
+                break;
+            case PicoComm.TX_GET_PID_PARAMS:
+                picoComm.getPidParams();
+                break;
+            case PicoComm.TX_GET_THROTTLE_PARAMS:
+                picoComm.getThrottleParams();
+                break;
+            case PicoComm.TX_GET_MOTOR_PARAMS:
+                picoComm.getMotorParams();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

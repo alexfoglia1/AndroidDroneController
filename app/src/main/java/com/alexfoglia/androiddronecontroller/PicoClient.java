@@ -1,6 +1,7 @@
 package com.alexfoglia.androiddronecontroller;
 
 public interface PicoClient {
+    public void onWrongChecksum(int txStatus);
     public void onSwVersion(byte major, byte minor, byte stage, byte rel_type);
     public void onThrottleParams(short descend, short hovering, short climb);
     public void onMotorParams(int motorNo, int minSignal, int maxSignal);

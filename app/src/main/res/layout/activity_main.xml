@@ -160,6 +160,7 @@
         android:layout_x="285dp"
         android:layout_y="67dp"
         android:text="Tx"
+        android:onClick="writeRollParams"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -182,6 +183,7 @@
         android:layout_x="285dp"
         android:layout_y="123dp"
         android:text="Tx"
+        android:onClick="writePitchParams"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -193,6 +195,7 @@
         android:layout_x="285dp"
         android:layout_y="174dp"
         android:text="Tx"
+        android:onClick="writeYawParams"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -204,6 +207,7 @@
         android:layout_x="283dp"
         android:layout_y="286dp"
         android:text="Tx"
+        android:onClick="writeThrottleParams"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -215,6 +219,7 @@
         android:layout_x="102dp"
         android:layout_y="502dp"
         android:text="Tx"
+        android:onClick="writeMotorParams"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -523,12 +528,12 @@
 
     <Button
         android:id="@+id/btnConnect"
-        android:layout_width="wrap_content"
+        android:layout_width="131dp"
         android:layout_height="wrap_content"
-        android:layout_x="236dp"
+        android:layout_x="223dp"
         android:layout_y="9dp"
-        android:text="Connect"
-        android:onClick="connect"/>
+        android:onClick="connect"
+        android:text="Connect" />
 
     <TextView
         android:id="@+id/txtConnStatus"
@@ -542,8 +547,8 @@
         android:id="@+id/txtSwVer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="290dp"
-        android:layout_y="681dp"
+        android:layout_x="295dp"
+        android:layout_y="683dp"
         android:text="0.0.0-b" />
 
     <Button
@@ -579,6 +584,7 @@
         android:layout_height="wrap_content"
         android:layout_x="30dp"
         android:layout_y="660dp"
+        android:onClick="flashWrite"
         android:text="Flash Write" />
 
 </AbsoluteLayout>
