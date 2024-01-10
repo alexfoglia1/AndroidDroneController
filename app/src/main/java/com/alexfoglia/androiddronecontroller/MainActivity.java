@@ -17,6 +17,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.icu.util.Output;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,26 +32,26 @@ import java.util.UUID;
 public class MainActivity extends PicoActivity implements PicoClient {
     public static final String HC05_MAC_ADDR = "58:56:00:00:8C:2E";
 
-    private PicoComm picoComm;
+    private PicoComm picoComm = PicoComm.instance();
 
-    private BluetoothSocket socket;
-    private OutputStream outputStream;
-    private InputStream inputStream;
+    private BluetoothSocket socket = null;
+    private OutputStream outputStream = null;
+    private InputStream inputStream = null;
 
+    private static String txtConnStatusText = "";
+    private static String txtBtnConnect = "";
+    private static String txtSwVerText = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-
-        picoComm = PicoComm.instance();
-        socket = null;
-        inputStream = null;
-        outputStream = null;
-
-        initBluetooth();
     }
 
     public void connect(View v) {
+
+        initBluetooth();
+
         Button btnConnect = findViewById(R.id.btnConnect);
         TextView txtStatus = (TextView) findViewById(R.id.txtConnStatus);
 
@@ -200,5 +201,38 @@ public class MainActivity extends PicoActivity implements PicoClient {
     @Override
     public void onYawPid(float kp, float ki, float kt, float sat, float ad, float bd) {
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        TextView txtConnStatus = findViewById(R.id.txtConnStatus);
+        TextView txtSwVer = findViewById(R.id.txtSwVer);
+        Button btnConnect = findViewById(R.id.btnConnect);
+
+        txtSwVerText = txtSwVer.getText().toString();
+        txtConnStatusText = txtConnStatus.getText().toString();
+        txtBtnConnect = btnConnect.getText().toString();
+
+        Log.d("test", "saveInstanceState");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        TextView txtConnStatus = findViewById(R.id.txtConnStatus);
+        TextView txtSwVer = findViewById(R.id.txtSwVer);
+        Button btnConnect = findViewById(R.id.btnConnect);
+
+        if (txtConnStatusText.length() > 0) {
+            txtConnStatus.setText(txtConnStatusText);
+        }
+        if (txtSwVerText.length() > 0) {
+            txtSwVer.setText(txtSwVerText);
+        }
+        if (txtBtnConnect.length() > 0) {
+            btnConnect.setText(txtBtnConnect);
+        }
     }
 }

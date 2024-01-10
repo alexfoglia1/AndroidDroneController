@@ -37,21 +37,4 @@ public abstract class PicoActivity extends AppCompatActivity implements PicoClie
         });
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        Log.d("test", getClass().toString() + " onSaveInstanceState");
-
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can restore the view hierarchy
-        super.onRestoreInstanceState(savedInstanceState);
-        // Save the user's current game state
-        Log.d("test", getClass().toString()+" onRestoreInstanceState");
-
-    }
-
 }

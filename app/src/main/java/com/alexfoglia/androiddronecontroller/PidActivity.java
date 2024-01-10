@@ -1,6 +1,7 @@
 package com.alexfoglia.androiddronecontroller;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ public class PidActivity extends PicoActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pid);
+
     }
 
     public void requestPidParams(View v) {
