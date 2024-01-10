@@ -46,6 +46,10 @@ public class PicoComm {
             0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0xE8, 0x03, 0xDC, 0x05, 0xDC, 0x05, 0xE8, 0x03, 0x04
     };
 
+    private static final int[] WRITE_FLASH = new int[] {
+            0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x00, 0xE8, 0x03, 0xDC, 0x05, 0xDC, 0x05, 0xE8, 0x03, 0x0E
+    };
+
     private static final int[] WRITE_ROLL_PARAMS = new int[] {
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1E
     };
@@ -82,7 +86,7 @@ public class PicoComm {
     private byte[] rxBuf;
     private int llRxBuf;
     private boolean stopped;
-    private PicoComm() {
+    public PicoComm() {
         outputStream = null;
         inputStream = null;
         rxThread = null;
@@ -236,6 +240,16 @@ public class PicoComm {
         }
     }
 
+    public boolean flashWrite() {
+        byte[] txMessage = castBytes(WRITE_FLASH);
+        try {
+            outputStream.write(txMessage);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public void start() {
         if (rxThread == null)
         {
@@ -283,84 +297,84 @@ public class PicoComm {
         //    }
         //}
         //else {
-            for (PicoClient cl : clients) {
-                switch (txStatus) {
-                    case TX_GET_SW_VER:
-                        cl.onSwVersion(rxBuf[8], rxBuf[9], rxBuf[10], rxBuf[11]);
-                        break;
-                    case TX_GET_THROTTLE_PARAMS:
-                        byte[] descend = new byte[]{rxBuf[9], rxBuf[8]};
-                        byte[] hovering = new byte[]{rxBuf[11], rxBuf[10]};
-                        byte[] climb = new byte[]{rxBuf[13], rxBuf[12]};
-                        cl.onThrottleParams(ByteBuffer.wrap(descend).getShort(0),
-                                ByteBuffer.wrap(hovering).getShort(0),
-                                ByteBuffer.wrap(climb).getShort(0));
-                        break;
-                    case TX_GET_MOTOR_PARAMS:
-                        byte[] m1Min = new byte[]{rxBuf[15], rxBuf[14], rxBuf[13], rxBuf[12]};
-                        byte[] m1Max = new byte[]{rxBuf[19], rxBuf[18], rxBuf[17], rxBuf[16]};
+        for (PicoClient cl : clients) {
+            switch (txStatus) {
+                case TX_GET_SW_VER:
+                    cl.onSwVersion(rxBuf[8], rxBuf[9], rxBuf[10], rxBuf[11]);
+                    break;
+                case TX_GET_THROTTLE_PARAMS:
+                    byte[] descend = new byte[]{rxBuf[9], rxBuf[8]};
+                    byte[] hovering = new byte[]{rxBuf[11], rxBuf[10]};
+                    byte[] climb = new byte[]{rxBuf[13], rxBuf[12]};
+                    cl.onThrottleParams(ByteBuffer.wrap(descend).getShort(0),
+                            ByteBuffer.wrap(hovering).getShort(0),
+                            ByteBuffer.wrap(climb).getShort(0));
+                    break;
+                case TX_GET_MOTOR_PARAMS:
+                    byte[] m1Min = new byte[]{rxBuf[15], rxBuf[14], rxBuf[13], rxBuf[12]};
+                    byte[] m1Max = new byte[]{rxBuf[19], rxBuf[18], rxBuf[17], rxBuf[16]};
 
-                        byte[] m2Min = new byte[]{rxBuf[27], rxBuf[26], rxBuf[25], rxBuf[24]};
-                        byte[] m2Max = new byte[]{rxBuf[31], rxBuf[30], rxBuf[29], rxBuf[28]};
+                    byte[] m2Min = new byte[]{rxBuf[27], rxBuf[26], rxBuf[25], rxBuf[24]};
+                    byte[] m2Max = new byte[]{rxBuf[31], rxBuf[30], rxBuf[29], rxBuf[28]};
 
-                        byte[] m3Min = new byte[]{rxBuf[39], rxBuf[38], rxBuf[37], rxBuf[36]};
-                        byte[] m3Max = new byte[]{rxBuf[43], rxBuf[42], rxBuf[41], rxBuf[40]};
+                    byte[] m3Min = new byte[]{rxBuf[39], rxBuf[38], rxBuf[37], rxBuf[36]};
+                    byte[] m3Max = new byte[]{rxBuf[43], rxBuf[42], rxBuf[41], rxBuf[40]};
 
-                        byte[] m4Min = new byte[]{rxBuf[51], rxBuf[50], rxBuf[49], rxBuf[48]};
-                        byte[] m4Max = new byte[]{rxBuf[55], rxBuf[54], rxBuf[53], rxBuf[52]};
+                    byte[] m4Min = new byte[]{rxBuf[51], rxBuf[50], rxBuf[49], rxBuf[48]};
+                    byte[] m4Max = new byte[]{rxBuf[55], rxBuf[54], rxBuf[53], rxBuf[52]};
 
-                        cl.onMotorParams(1, ByteBuffer.wrap(m1Min).getInt(0), ByteBuffer.wrap(m1Max).getInt(0));
-                        cl.onMotorParams(2, ByteBuffer.wrap(m2Min).getInt(0), ByteBuffer.wrap(m2Max).getInt(0));
-                        cl.onMotorParams(3, ByteBuffer.wrap(m3Min).getInt(0), ByteBuffer.wrap(m3Max).getInt(0));
-                        cl.onMotorParams(4, ByteBuffer.wrap(m4Min).getInt(0), ByteBuffer.wrap(m4Max).getInt(0));
-                        break;
-                    case TX_GET_PID_PARAMS:
-                        byte[] roll_kp = new byte[]{rxBuf[11], rxBuf[10], rxBuf[9], rxBuf[8]};
-                        byte[] roll_ki = new byte[]{rxBuf[15], rxBuf[14], rxBuf[13], rxBuf[12]};
-                        byte[] roll_kt = new byte[]{rxBuf[19], rxBuf[18], rxBuf[17], rxBuf[16]};
-                        byte[] roll_sat = new byte[]{rxBuf[23], rxBuf[22], rxBuf[21], rxBuf[20]};
-                        byte[] roll_ad = new byte[]{rxBuf[27], rxBuf[26], rxBuf[25], rxBuf[24]};
-                        byte[] roll_bd = new byte[]{rxBuf[31], rxBuf[30], rxBuf[29], rxBuf[28]};
+                    cl.onMotorParams(1, ByteBuffer.wrap(m1Min).getInt(0), ByteBuffer.wrap(m1Max).getInt(0));
+                    cl.onMotorParams(2, ByteBuffer.wrap(m2Min).getInt(0), ByteBuffer.wrap(m2Max).getInt(0));
+                    cl.onMotorParams(3, ByteBuffer.wrap(m3Min).getInt(0), ByteBuffer.wrap(m3Max).getInt(0));
+                    cl.onMotorParams(4, ByteBuffer.wrap(m4Min).getInt(0), ByteBuffer.wrap(m4Max).getInt(0));
+                    break;
+                case TX_GET_PID_PARAMS:
+                    byte[] roll_kp = new byte[]{rxBuf[11], rxBuf[10], rxBuf[9], rxBuf[8]};
+                    byte[] roll_ki = new byte[]{rxBuf[15], rxBuf[14], rxBuf[13], rxBuf[12]};
+                    byte[] roll_kt = new byte[]{rxBuf[19], rxBuf[18], rxBuf[17], rxBuf[16]};
+                    byte[] roll_sat = new byte[]{rxBuf[23], rxBuf[22], rxBuf[21], rxBuf[20]};
+                    byte[] roll_ad = new byte[]{rxBuf[27], rxBuf[26], rxBuf[25], rxBuf[24]};
+                    byte[] roll_bd = new byte[]{rxBuf[31], rxBuf[30], rxBuf[29], rxBuf[28]};
 
-                        byte[] pitch_kp = new byte[]{rxBuf[35], rxBuf[34], rxBuf[33], rxBuf[32]};
-                        byte[] pitch_ki = new byte[]{rxBuf[39], rxBuf[38], rxBuf[37], rxBuf[36]};
-                        byte[] pitch_kt = new byte[]{rxBuf[43], rxBuf[42], rxBuf[41], rxBuf[40]};
-                        byte[] pitch_sat = new byte[]{rxBuf[47], rxBuf[46], rxBuf[45], rxBuf[44]};
-                        byte[] pitch_ad = new byte[]{rxBuf[51], rxBuf[50], rxBuf[49], rxBuf[48]};
-                        byte[] pitch_bd = new byte[]{rxBuf[55], rxBuf[54], rxBuf[53], rxBuf[52]};
+                    byte[] pitch_kp = new byte[]{rxBuf[35], rxBuf[34], rxBuf[33], rxBuf[32]};
+                    byte[] pitch_ki = new byte[]{rxBuf[39], rxBuf[38], rxBuf[37], rxBuf[36]};
+                    byte[] pitch_kt = new byte[]{rxBuf[43], rxBuf[42], rxBuf[41], rxBuf[40]};
+                    byte[] pitch_sat = new byte[]{rxBuf[47], rxBuf[46], rxBuf[45], rxBuf[44]};
+                    byte[] pitch_ad = new byte[]{rxBuf[51], rxBuf[50], rxBuf[49], rxBuf[48]};
+                    byte[] pitch_bd = new byte[]{rxBuf[55], rxBuf[54], rxBuf[53], rxBuf[52]};
 
-                        byte[] yaw_kp = new byte[]{rxBuf[59], rxBuf[58], rxBuf[57], rxBuf[56]};
-                        byte[] yaw_ki = new byte[]{rxBuf[63], rxBuf[62], rxBuf[61], rxBuf[60]};
-                        byte[] yaw_kt = new byte[]{rxBuf[67], rxBuf[66], rxBuf[65], rxBuf[64]};
-                        byte[] yaw_sat = new byte[]{rxBuf[71], rxBuf[70], rxBuf[69], rxBuf[68]};
-                        byte[] yaw_ad = new byte[]{rxBuf[75], rxBuf[74], rxBuf[73], rxBuf[72]};
-                        byte[] yaw_bd = new byte[]{rxBuf[79], rxBuf[78], rxBuf[77], rxBuf[76]};
+                    byte[] yaw_kp = new byte[]{rxBuf[59], rxBuf[58], rxBuf[57], rxBuf[56]};
+                    byte[] yaw_ki = new byte[]{rxBuf[63], rxBuf[62], rxBuf[61], rxBuf[60]};
+                    byte[] yaw_kt = new byte[]{rxBuf[67], rxBuf[66], rxBuf[65], rxBuf[64]};
+                    byte[] yaw_sat = new byte[]{rxBuf[71], rxBuf[70], rxBuf[69], rxBuf[68]};
+                    byte[] yaw_ad = new byte[]{rxBuf[75], rxBuf[74], rxBuf[73], rxBuf[72]};
+                    byte[] yaw_bd = new byte[]{rxBuf[79], rxBuf[78], rxBuf[77], rxBuf[76]};
 
-                        cl.onRollPid(ByteBuffer.wrap(roll_kp).getFloat(0),
-                                ByteBuffer.wrap(roll_ki).getFloat(0),
-                                ByteBuffer.wrap(roll_kt).getFloat(0),
-                                ByteBuffer.wrap(roll_sat).getFloat(0),
-                                ByteBuffer.wrap(roll_ad).getFloat(0),
-                                ByteBuffer.wrap(roll_bd).getFloat(0));
+                    cl.onRollPid(ByteBuffer.wrap(roll_kp).getFloat(0),
+                            ByteBuffer.wrap(roll_ki).getFloat(0),
+                            ByteBuffer.wrap(roll_kt).getFloat(0),
+                            ByteBuffer.wrap(roll_sat).getFloat(0),
+                            ByteBuffer.wrap(roll_ad).getFloat(0),
+                            ByteBuffer.wrap(roll_bd).getFloat(0));
 
-                        cl.onPitchPid(ByteBuffer.wrap(pitch_kp).getFloat(0),
-                                ByteBuffer.wrap(pitch_ki).getFloat(0),
-                                ByteBuffer.wrap(pitch_kt).getFloat(0),
-                                ByteBuffer.wrap(pitch_sat).getFloat(0),
-                                ByteBuffer.wrap(pitch_ad).getFloat(0),
-                                ByteBuffer.wrap(pitch_bd).getFloat(0));
+                    cl.onPitchPid(ByteBuffer.wrap(pitch_kp).getFloat(0),
+                            ByteBuffer.wrap(pitch_ki).getFloat(0),
+                            ByteBuffer.wrap(pitch_kt).getFloat(0),
+                            ByteBuffer.wrap(pitch_sat).getFloat(0),
+                            ByteBuffer.wrap(pitch_ad).getFloat(0),
+                            ByteBuffer.wrap(pitch_bd).getFloat(0));
 
-                        cl.onYawPid(ByteBuffer.wrap(yaw_kp).getFloat(0),
-                                ByteBuffer.wrap(yaw_ki).getFloat(0),
-                                ByteBuffer.wrap(yaw_kt).getFloat(0),
-                                ByteBuffer.wrap(yaw_sat).getFloat(0),
-                                ByteBuffer.wrap(yaw_ad).getFloat(0),
-                                ByteBuffer.wrap(yaw_bd).getFloat(0));
-                        break;
-                    default:
-                        break;
-                }
+                    cl.onYawPid(ByteBuffer.wrap(yaw_kp).getFloat(0),
+                            ByteBuffer.wrap(yaw_ki).getFloat(0),
+                            ByteBuffer.wrap(yaw_kt).getFloat(0),
+                            ByteBuffer.wrap(yaw_sat).getFloat(0),
+                            ByteBuffer.wrap(yaw_ad).getFloat(0),
+                            ByteBuffer.wrap(yaw_bd).getFloat(0));
+                    break;
+                default:
+                    break;
             }
+        }
         //}
     }
 
